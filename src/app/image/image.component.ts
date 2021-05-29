@@ -19,6 +19,8 @@ export class ImageComponent implements OnInit {
         this.url=ev.target.result;
       }, false);
     }
-    console.log(this.url);
+  }
+  save():void{
+    
   }
 }
