@@ -1,0 +1,4 @@
+<p>image works!</p>
+<img *ngIf="url" [src]="url" height="200"> <br/>
+<input type="file" accept="image/*" (change)="onFileChanged($event)" >
+{{url}}
