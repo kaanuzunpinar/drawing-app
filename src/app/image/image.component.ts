@@ -70,15 +70,18 @@ export class ImageComponent implements OnInit {
   }
   debugBase64(base64URL:any){
     var win = window.open();
-    win?.document.write('<iframe src="' + base64URL  + '" frameborder="0" style="border:0; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%;" allowfullscreen></iframe>');
+    var link = win?.document.createElement("a");
+    link!.href=base64URL;
+    link!.download="new_image"
+    win?.document.body.appendChild(link!);
+    link!.click();
+    win?.document.body.removeChild(link!);
+    win?.document.write('<img src="' + base64URL  + '" ></img>');
     win?.document.close();
   }
 
-
   save():void{
-    this.debugBase64(this.canvas.toDataURL({
-      format: 'jpeg',
-    }));
-    
+    var dataUrl=this.canvas.toDataURL('download');
+    this.debugBase64(dataUrl);
   }
 }
