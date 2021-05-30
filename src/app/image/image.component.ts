@@ -12,15 +12,11 @@ export class ImageComponent implements OnInit {
   url:string="";
   ngOnInit(): void {
     this.canvas=new fabric.Canvas('c');
-    
   }
   onFileChanged(event: any){
     if(event.target.files && event.target.files[0]){
       const reader = new FileReader();
       reader.readAsDataURL(event.target.files[0]);
-    /*  reader.onload=(e)=>{
-        this.url=e.target?.result as string;
-      }*/
       reader.addEventListener("load", (ev:any)=> {
         this.url=ev.target.result;
         var a1 = document.createElement('img');
@@ -33,16 +29,23 @@ export class ImageComponent implements OnInit {
           });
           this.canvas.add(imageinstance)
         }
-       /* var imgElement:any = document.getElementById('image');
-        var imgInstance = new fabric.Image(imgElement);
-  //  imgInstance=fabric.Image.fromURL( this.url);
-        this.canvas.add(imgInstance);
-        console.log(this.url+" 12312")*/
       }, false);
     }
     
   }
+  debugBase64(base64URL:any){
+    var win = window.open();
+    win?.document.write('<iframe src="' + base64URL  + '" frameborder="0" style="border:0; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%;" allowfullscreen></iframe>');
+    win?.document.close();
+  }
   save():void{
+    this.debugBase64(this.canvas.toDataURL({
+      format: 'jpeg',
+    }));
+    /*var save=document.getElementById('link') as HTMLAnchorElement;
+    save.href = this.canvas.toDataURL({
+      format: 'jpeg',
+    });*/
     
   }
 }
