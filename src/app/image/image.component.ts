@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { fabric }  from "fabric";
+import { ButtonService } from '../button.service';
 @Component({
   selector: 'app-image',
   templateUrl: './image.component.html',
@@ -12,7 +13,19 @@ export class ImageComponent implements OnInit {
   line:any;
   lineColor:string="black";
   lineThickness:number=4;
-  constructor() { }
+  
+  constructor(private service:ButtonService) {
+
+    this.service.type$.subscribe((data) => {
+      if(typeof(data)=='number'){
+        this.lineThickness=data;
+      }
+      else{
+        this.lineColor=data;
+      }
+    }
+    );
+   }
  
   ngOnInit(): void {
     this.canvas =new fabric.Canvas('c',{
@@ -84,11 +97,5 @@ export class ImageComponent implements OnInit {
   save():void{
     var dataUrl=this.canvas.toDataURL('download');
     this.debugBase64(dataUrl);
-  }
-  color(e:string){
-    this.lineColor=e;
-  }
-  thick(t:number){
-    this.lineThickness=t;
   }
 }
