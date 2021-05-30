@@ -1,12 +1,14 @@
+<input  type="file" accept="image/*" (change)="onFileChanged($event)" >
 <div>
     Color: <button (click)="color('black')">Black </button> 
     <button class="red" (click)="color('red')">Red</button>
     <button class="blue" (click)="color('blue')">Blue</button>
 </div>
 <div>
-    Thickness: <button (click)="thick(2)">Lower </button> 
-    <button (click)="thick(4)">Low </button> 
-    <button class="red" (click)="thick(6)">Mid</button>
-    <button class="blue" (click)="thick(10)">High</button>
-    <button class="blue" (click)="thick(20)">Higher</button>
+    Thickness: 
+    <button class="green" (click)="thick(2)">Lower </button> 
+    <button class="green" (click)="thick(4)">Low </button> 
+    <button class="yellow" (click)="thick(6)">Mid</button>
+    <button class="yellow" (click)="thick(10)">High</button>
+    <button class="red" (click)="thick(20)">Higher</button>
 </div>

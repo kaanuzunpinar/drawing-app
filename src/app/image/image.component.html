@@ -1,5 +1,7 @@
+<div class="center">
+
 <canvas id="c"></canvas>
-<img id="image" *ngIf="url" [src]="url" > <br/>
-<input  type="file" accept="image/*" (change)="onFileChanged($event)" >
+
+</div>
 <button id="link" *ngIf="url" (click)="save()">Save!</button>
-<app-menu></app-menu>
+<app-menu class="center"></app-menu>

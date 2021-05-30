@@ -1,6 +1,4 @@
-.red{
-    color: red;
-}
-.blue{
-    color:blue;
+.center{
+    display:grid;
+    justify-items: center;
 }
