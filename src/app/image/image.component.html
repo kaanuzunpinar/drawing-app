@@ -1,6 +1,4 @@
-<p>image works!</p>
 <canvas  id="c"></canvas>
-<img id="image"  *ngIf="url" [src]="url" height="200"> <br/>
+<img id="image" *ngIf="url" [src]="url" > <br/>
 <input type="file" accept="image/*" (change)="onFileChanged($event)" >
-<a id="link" (click)="save()">Save!</a>
-<img   src="http://cdn.akc.org/content/article-body-image/samoyed_puppy_dog_pictures.jpg" alt="">
+<button id="link" (click)="save()">Save!</button>
