@@ -14,5 +14,3 @@ app.get('/*', function(req, res) {
     res.sendFile('index.html', {root: 'dist/image-draw/'}
   );
   });
-
-  app.listen(process.env.PORT || 8080);
