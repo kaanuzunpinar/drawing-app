@@ -1,4 +1,16 @@
-<canvas  id="c"></canvas>
+<canvas id="c"></canvas>
 <img id="image" *ngIf="url" [src]="url" > <br/>
-<input type="file" accept="image/*" (change)="onFileChanged($event)" >
-<button id="link" (click)="save()">Save!</button>
+<input  type="file" accept="image/*" (change)="onFileChanged($event)" >
+<button id="link" *ngIf="url" (click)="save()">Save!</button>
+<div>
+    Color: <button (click)="color('black')">Black </button> 
+    <button class="red" (click)="color('red')">Red</button>
+    <button class="blue" (click)="color('blue')">Blue</button>
+</div>
+<div>
+    Thickness: <button (click)="thick(2)">Lower </button> 
+    <button (click)="thick(4)">Low </button> 
+    <button class="red" (click)="thick(6)">Mid</button>
+    <button class="blue" (click)="thick(10)">High</button>
+    <button class="blue" (click)="thick(20)">Higher</button>
+</div>

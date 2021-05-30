@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { fabric }  from "fabric";
-import { Canvas, Image } from 'fabric/fabric-impl';
 @Component({
   selector: 'app-image',
   templateUrl: './image.component.html',
@@ -11,6 +10,8 @@ export class ImageComponent implements OnInit {
   url:string="";//url for uploading image.
   isDown:boolean=false;
   line:any;
+  lineColor:string="black";
+  lineThickness:number=4;
   constructor() { }
  
   ngOnInit(): void {
@@ -46,9 +47,9 @@ export class ImageComponent implements OnInit {
             var pointer = this.canvas.getPointer(o.e);
             var points = [ pointer.x, pointer.y, pointer.x, pointer.y ];
             this.line = new fabric.Line(points, {
-              strokeWidth: 5,
-              fill: 'red',
-              stroke: 'red',
+              strokeWidth: this.lineThickness,
+              fill:this.lineColor,
+              stroke: this.lineColor,
               originX: 'center',
               originY: 'center'
             });
@@ -83,5 +84,11 @@ export class ImageComponent implements OnInit {
   save():void{
     var dataUrl=this.canvas.toDataURL('download');
     this.debugBase64(dataUrl);
+  }
+  color(e:string){
+    this.lineColor=e;
+  }
+  thick(t:number){
+    this.lineThickness=t;
   }
 }
