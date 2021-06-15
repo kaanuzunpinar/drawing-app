@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { fabric }  from "fabric";
+import { IDataURLOptions } from 'fabric/fabric-impl';
 import { ButtonService } from '../button.service';
 @Component({
   selector: 'app-image',
@@ -7,10 +8,10 @@ import { ButtonService } from '../button.service';
   styleUrls: ['./image.component.css']
 })
 export class ImageComponent implements OnInit {
-  canvas:any;
+  canvas!:fabric.Canvas;
   url:string="";//url for uploading image.
   isDown:boolean=false;
-  line:any;
+  line!:fabric.Line;
   lineColor:string="black";
   lineThickness:number=4;
 
@@ -24,6 +25,7 @@ export class ImageComponent implements OnInit {
         this.lineColor=data;
       }
     });
+
     this.service.urls$.subscribe((urlS)=>{
       this.url=urlS;
       this.createImage();
@@ -40,6 +42,9 @@ export class ImageComponent implements OnInit {
     var imgElement = document.createElement('img');
     imgElement.src = this.url;
     imgElement.onload = () => {
+      //
+      // Basic configurations about image object of fabric
+      //
       var imageinstance = new fabric.Image(imgElement, {
         angle: 0,
         opacity: 1,
@@ -54,6 +59,14 @@ export class ImageComponent implements OnInit {
       this.canvas.add(imageinstance)
       this.canvas.setWidth(imgElement.width);
       this.canvas.setHeight(imgElement.height);
+
+      //
+      // End of configurations.
+      //
+
+
+      //Adding listeners to canvas.
+
       this.canvas.on('mouse:down', (o: any) => {
         this.isDown = true;
         var pointer = this.canvas.getPointer(o.e);
@@ -67,14 +80,24 @@ export class ImageComponent implements OnInit {
         });
         this.canvas.add(this.line);
       });
+
+
+
+
       this.canvas.on('mouse:move', (o: any) => {
         if (!this.isDown) return;
         var pointer = this.canvas.getPointer(o.e);
         this.line.set({ x2: pointer.x, y2: pointer.y });
         this.canvas.renderAll();
+  
       });
+
+
+
+
       this.canvas.on('mouse:up', (o: any) => {
         this.isDown = false;
+        
       });
     }
 
@@ -93,7 +116,7 @@ export class ImageComponent implements OnInit {
   }
 
   save():void{
-    var dataUrl=this.canvas.toDataURL('download');
+    var dataUrl=this.canvas.toDataURL('download' as IDataURLOptions);
     this.debugBase64(dataUrl);
   }
 }
