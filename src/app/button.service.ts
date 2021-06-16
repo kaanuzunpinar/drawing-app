@@ -16,7 +16,7 @@ export class ButtonService {
   changeType(type:any){//service for buttons color/thickness.
     this.subjects.next(type);
   }
-  sendUrl(url:string){
+  sendUrl(url:string){//service for image url
     this.urls.next(url);
   }
 }

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { fabric }  from "fabric";
 import { IDataURLOptions } from 'fabric/fabric-impl';
 import { ButtonService } from '../button.service';
+import { HistoryService } from '../history.service';
+import { LineService } from '../line.service';
 @Component({
   selector: 'app-image',
   templateUrl: './image.component.html',
@@ -15,7 +17,10 @@ export class ImageComponent implements OnInit {
   lineColor:string="black";
   lineThickness:number=4;
 
-  constructor(private service:ButtonService) {
+  constructor(
+    private service:ButtonService,
+    private history:HistoryService,
+    private lineService:LineService) {
 
     this.service.type$.subscribe((data) => {
       if(typeof(data)=='number'){
@@ -31,12 +36,14 @@ export class ImageComponent implements OnInit {
       this.createImage();
     });
     
+    
    }
  
   ngOnInit(): void {
     this.canvas =new fabric.Canvas('c',{
       selection:false,
     });
+    this.lineService.create(this.canvas);
   }
   createImage(){
     var imgElement = document.createElement('img');
@@ -79,6 +86,7 @@ export class ImageComponent implements OnInit {
           originY: 'center'
         });
         this.canvas.add(this.line);
+        this.lineService.add(this.line);
       });
 
 
@@ -97,7 +105,10 @@ export class ImageComponent implements OnInit {
 
       this.canvas.on('mouse:up', (o: any) => {
         this.isDown = false;
-        
+      });
+
+      this.canvas.on('object:added',()=>{
+        this.history.add(this.line);
       });
     }
 
@@ -118,5 +129,16 @@ export class ImageComponent implements OnInit {
   save():void{
     var dataUrl=this.canvas.toDataURL('download' as IDataURLOptions);
     this.debugBase64(dataUrl);
+  }
+
+  undo(){
+   this.history.undo(this.canvas);
+  }
+
+  remove(){
+    this.lineService.hide("black");
+  }
+  redo(){
+    
   }
 }
