@@ -17,6 +17,9 @@ export class ImageComponent implements OnInit {
   lineColor:string="black";
   lineThickness:number=4;
 
+  filteredColor:string="";
+  filteredSize:number=-1;
+
   constructor(
     private service:ButtonService,
     private history:HistoryService,
@@ -135,10 +138,35 @@ export class ImageComponent implements OnInit {
    this.history.undo(this.canvas);
   }
 
-  remove(){
-    this.lineService.hide("black");
-  }
   redo(){
     
+  }
+  filter(param:string|number){
+    if(typeof param == 'string'){
+      this.filteredColor=param;
+    } 
+    else{
+      this.filteredSize=param;
+    }
+  }
+  showHide(show:boolean){
+    if(show){
+      this.lineService.show(this.filteredColor,this.filteredSize)
+    }
+    else{
+      this.lineService.hide(this.filteredColor,this.filteredSize)
+    }
+  }
+
+
+  pxToText(size:number):string{//Convert for px to mid, thick etc.
+    switch(size){
+      case 2: return "Lower";
+      case 4: return "Low";
+      case 6: return "Mid";
+      case 10: return "High";
+      case 20: return "Higher";
+      default: return "";
+    }
   }
 }

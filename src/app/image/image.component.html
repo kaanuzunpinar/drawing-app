@@ -5,25 +5,45 @@
 </div>
 <button style="display: block; margin: auto; margin-bottom: 5px; margin-top: 5px;" id="link" *ngIf="url" (click)="save()">Save!</button>
 
-<app-menu class="center"></app-menu>
+<app-menu class="center" style="background-color: rgb(216, 212, 207);margin-left: 30%; margin-right: 30%; border-radius: 10px;"></app-menu>
 
-<div class="d1" *ngIf="url">
-    
+<div class="d1" *ngIf="url" style="background-color: gray;margin-left: 30%; margin-right: 30%; margin-top: 20px; border-radius: 10px;">
+    <h3 style="margin: 5px;">Edit</h3>
     <div class="ur">
         <button style="margin-top: 5px;"  (click)="undo()">Undo!</button>
         <button style="margin-top: 5px;"  (click)="redo()">Redo!</button>
     </div>
-
-
-    <div class="dropdown"   >
-        <button class="dropbtn" >Filter</button>
-        <div class="dropdown-content">
-          <a href="#">Black</a>
-          <a href="#">Red</a>
-          <a href="#">Blue</a>
-        </div>
-        
+    <div *ngIf="filteredColor || filteredSize>0" >
+        <label >Filtered: 
+            <span *ngIf="filteredColor" [style.color]="filteredColor">{{filteredColor.toUpperCase()}} Color</span>
+            <span *ngIf="filteredSize>0" [style.font-weight]="'bold'"> {{pxToText(filteredSize)}} Size </span> </label>
+        <button (click)="showHide(true)">Show Lines</button>
+        <button (click)="showHide(false)">Hide Lines</button>
     </div>
+    
+    <div class>
+        <div class="dropdown">
+            <button class="dropbtn" >Filter By Color</button>
+            <div class="dropdown-content">
+              <a (click)="filter('black')" [style.color]="'black'">Black</a>
+              <a (click)="filter('red')" [style.color]="'red'">Red</a>
+              <a (click)="filter('blue')"[style.color]="'blue'">Blue</a>
+              <a (click)="filter('')">Clear</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn" >Filter By Thickness</button>
+            <div class="dropdown-content">
+              <a (click)="filter(2)" [style.font-size.px]="'10'">Lower</a>
+              <a (click)="filter(4)" [style.font-size.px]="'12'">Low</a>
+              <a (click)="filter(6)" [style.font-size.px]="'14'">Mid</a>
+              <a (click)="filter(10)" [style.font-size.px]="'16'">High</a>
+              <a (click)="filter(20)" [style.font-size.px]="'20'">Higher</a>
+              <a (click)="filter(-1)" [style.font-size.px]="'20'" [style.color]="'rgb(76, 223, 76)'">Clear</a>
+            </div>
+        </div>
+    </div>
+    
     
    
 

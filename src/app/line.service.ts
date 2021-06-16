@@ -19,21 +19,40 @@ export class LineService {
    add(line:fabric.Line){
      this.lines.push(line);
    }
-   hide(color:string){
-    for(let l1 of this.lines){
-      if(l1.fill==color){
-        l1.opacity=0;
+   hide(color:string,size:number){
+     if(size>0){
+      for(let l1 of this.lines){
+        if(l1.fill==color && l1.strokeWidth==size){
+          l1.opacity=0;
+        }
       }
-    }
+     }
+     else{
+      for(let l1 of this.lines){
+        if(l1.fill==color){
+          l1.opacity=0;
+        }
+      }
+     }
     this.canvas?.renderAll();
    }
 
-   show(color:string){
-    for(let l1 of this.lines){
-      if(l1.fill==color){
-        l1.opacity=1;
+   show(color:string,size:number){
+    if(size>0){
+      for(let l1 of this.lines){
+        if(l1.fill==color  && l1.strokeWidth==size){
+          l1.opacity=1;
+        }
       }
     }
+    else{
+      for(let l1 of this.lines){
+        if(l1.fill==color){
+          l1.opacity=1;
+        }
+      }
+    }
+    
     
     this.canvas?.renderAll();
    }
