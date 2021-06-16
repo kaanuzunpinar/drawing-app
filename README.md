@@ -1,5 +1,5 @@
 For demo site: https://drawingimg-app.herokuapp.com/
-This is an online Image-Drawing App. You can complete images with draw lines and save their edited versions.
+This is an online Image-Drawing App. You can complete the images with the lines and save their edited versions.
 
 
 # ImageDraw
