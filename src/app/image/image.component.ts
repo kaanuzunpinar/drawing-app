@@ -4,6 +4,7 @@ import { IDataURLOptions } from 'fabric/fabric-impl';
 import { ButtonService } from '../button.service';
 import { HistoryService } from '../history.service';
 import { LineService } from '../line.service';
+
 @Component({
   selector: 'app-image',
   templateUrl: './image.component.html',
@@ -19,6 +20,8 @@ export class ImageComponent implements OnInit {
 
   filteredColor:string="";
   filteredSize:number=-1;
+
+  images:Array<any>=[];
 
   constructor(
     private service:ButtonService,
@@ -161,9 +164,6 @@ export class ImageComponent implements OnInit {
     link!.download="new_image"
     win?.document.body.appendChild(link!);
     link!.click();
-    win?.document.body.removeChild(link!);
-    win?.document.write('<img src="' + base64URL  + '" ></img>');
-    //win?.document.write("<h3>The image is downloaded. For continue editing click <a (click)>here</a></h3>")
     win?.document.close();
     win?.close();
   }
@@ -171,7 +171,12 @@ export class ImageComponent implements OnInit {
   save():void{
     var dataUrl=this.canvas.toDataURL('download' as IDataURLOptions);
     this.debugBase64(dataUrl);
-    
+    this.images.push(dataUrl);
   }
   //end of save methods.
+
+  pickImage(image:string){
+    this.url=image;
+    this.createImage();
+  }
 }
