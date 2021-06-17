@@ -19,11 +19,23 @@ export class LineService {
    add(line:fabric.Line){
      this.lines.push(line);
    }
-   hide(color:string,size:number){
+   hide(color:string,size:number):Array<fabric.Line>{
+     let array=[];
      if(size>0){
-      for(let l1 of this.lines){
-        if(l1.fill==color && l1.strokeWidth==size){
-          l1.opacity=0;
+      if(color){
+        for(let l1 of this.lines){
+          if(l1.fill==color && l1.strokeWidth==size){
+            l1.opacity=0;
+            array.push(l1);
+          }
+        }
+      }
+      else{
+        for(let l1 of this.lines){
+          if(l1.strokeWidth==size){
+            l1.opacity=0;
+            array.push(l1);
+          }
         }
       }
      }
@@ -31,29 +43,46 @@ export class LineService {
       for(let l1 of this.lines){
         if(l1.fill==color){
           l1.opacity=0;
+          array.push(l1);
         }
       }
      }
     this.canvas?.renderAll();
+    return array;
    }
 
-   show(color:string,size:number){
+   show(color:string,size:number):Array<fabric.Line>{
+    let array=[];
     if(size>0){
-      for(let l1 of this.lines){
-        if(l1.fill==color  && l1.strokeWidth==size){
-          l1.opacity=1;
+      if(color){
+        for(let l1 of this.lines){
+          if(l1.fill==color  && l1.strokeWidth==size){
+            l1.opacity=1;
+            array.push(l1);
+          }
         }
       }
+      else{
+        for(let l1 of this.lines){
+          if(l1.strokeWidth==size){
+            l1.opacity=1;
+            array.push(l1);
+          }
+        }
+      }
+      
     }
     else{
       for(let l1 of this.lines){
         if(l1.fill==color){
           l1.opacity=1;
+          array.push(l1);
         }
       }
     }
     
     
     this.canvas?.renderAll();
+    return array;
    }
 }

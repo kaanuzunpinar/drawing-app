@@ -22,7 +22,7 @@ export class ImageComponent implements OnInit {
 
   constructor(
     private service:ButtonService,
-    private history:HistoryService,
+    public history:HistoryService,
     private lineService:LineService) {
 
     this.service.type$.subscribe((data) => {
@@ -89,7 +89,8 @@ export class ImageComponent implements OnInit {
           originY: 'center'
         });
         this.canvas.add(this.line);
-        this.lineService.add(this.line);
+        this.lineService.add(this.line);//for filtering.
+        this.history.addLine(this.line);//for undo and redo
       });
 
 
@@ -110,38 +111,12 @@ export class ImageComponent implements OnInit {
         this.isDown = false;
       });
 
-      this.canvas.on('object:added',()=>{
-        this.history.add(this.line);
-      });
     }
 
     
   }
-  debugBase64(base64URL:any){
-    var win = window.open();
-    var link = win?.document.createElement("a");
-    link!.href=base64URL;
-    link!.download="new_image"
-    win?.document.body.appendChild(link!);
-    link!.click();
-    win?.document.body.removeChild(link!);
-    win?.document.write('<img src="' + base64URL  + '" ></img>');
-    win?.document.close();
-  }
 
-  save():void{
-    var dataUrl=this.canvas.toDataURL('download' as IDataURLOptions);
-    this.debugBase64(dataUrl);
-  }
-
-  undo(){
-   this.history.undo(this.canvas);
-  }
-
-  redo(){
-    
-  }
-  filter(param:string|number){
+  filter(param:string|number){//choose color/thickness
     if(typeof param == 'string'){
       this.filteredColor=param;
     } 
@@ -149,12 +124,18 @@ export class ImageComponent implements OnInit {
       this.filteredSize=param;
     }
   }
+
+
   showHide(show:boolean){
     if(show){
-      this.lineService.show(this.filteredColor,this.filteredSize)
+      let array=this.lineService.show(this.filteredColor,this.filteredSize);
+      if(array.length>0)
+        this.history.showLines(array);
     }
     else{
-      this.lineService.hide(this.filteredColor,this.filteredSize)
+      let array= this.lineService.hide(this.filteredColor,this.filteredSize)
+      if(array.length>0)
+        this.history.hideLines(array);
     }
   }
 
@@ -169,4 +150,28 @@ export class ImageComponent implements OnInit {
       default: return "";
     }
   }
+
+
+
+  //Methods for Saving the edited image:
+  debugBase64(base64URL:any){
+    var win = window.open();
+    var link = win?.document.createElement("a");
+    link!.href=base64URL;
+    link!.download="new_image"
+    win?.document.body.appendChild(link!);
+    link!.click();
+    win?.document.body.removeChild(link!);
+    win?.document.write('<img src="' + base64URL  + '" ></img>');
+    //win?.document.write("<h3>The image is downloaded. For continue editing click <a (click)>here</a></h3>")
+    win?.document.close();
+    win?.close();
+  }
+
+  save():void{
+    var dataUrl=this.canvas.toDataURL('download' as IDataURLOptions);
+    this.debugBase64(dataUrl);
+    
+  }
+  //end of save methods.
 }
