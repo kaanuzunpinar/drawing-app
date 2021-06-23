@@ -22,6 +22,7 @@ export class ImageComponent implements OnInit {
   filteredSize:number=-1;
 
   images:Array<any>=[];
+  shape:string="line";
 
   constructor(
     private service:ButtonService,
@@ -42,6 +43,9 @@ export class ImageComponent implements OnInit {
       this.createImage();
     });
     
+    this.service.shapes$.subscribe((shapeS)=>{//subscription for line or point
+      this.shape=shapeS;
+    });
     
    }
  
@@ -84,6 +88,8 @@ export class ImageComponent implements OnInit {
         this.isDown = true;
         var pointer = this.canvas.getPointer(o.e);
         var points = [pointer.x, pointer.y, pointer.x, pointer.y];
+        
+        if(this.shape=="line"){
         this.line = new fabric.Line(points, {
           strokeWidth: this.lineThickness,
           fill: this.lineColor,
@@ -94,6 +100,23 @@ export class ImageComponent implements OnInit {
         this.canvas.add(this.line);
         this.lineService.add(this.line);//for filtering.
         this.history.addLine(this.line);//for undo and redo
+        }
+
+
+
+        else{
+          let point:fabric.Circle =new fabric.Circle({
+            left:pointer.x,
+            top:pointer.y,
+            originX:'center', originY:'center',
+            radius: this.lineThickness,
+            strokeWidth:1,
+            stroke:this.lineColor,
+            fill:this.lineColor,
+          })
+          this.canvas.add(point);
+        }
+        
       });
 
 

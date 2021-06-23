@@ -1,5 +1,9 @@
 <input  type="file" accept="image/*" (change)="onFileChanged($event)" >
 <h3 style="margin: 5px;">Draw</h3>
+<div >
+    Shape: <button (click)="shape('line')">Line </button> 
+    <button [style.margin-left]="'10px'"  (click)="shape('point')">Point</button>
+</div>
 <div>
     Color: <button (click)="color('black')">Black </button> 
     <button [style.color]="'red'" (click)="color('red')">Red</button>

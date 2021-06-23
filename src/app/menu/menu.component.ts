@@ -14,6 +14,9 @@ export class MenuComponent implements OnInit {
   color(e:string){
     this.service.changeType(e);
   }
+  shape(s:string){
+    this.service.changeShape(s);
+  }
   thick(t:number){
     this.service.changeType(t);
   }
