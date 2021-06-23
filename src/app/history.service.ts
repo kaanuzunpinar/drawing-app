@@ -11,67 +11,56 @@ export class HistoryService {
     this.redostack=[];
    }
 
-   addLine(line:fabric.Line){
+   addLine(line:fabric.Object){
      let change=new Change("add");
      change.line=line;
      this.undostack.push(change);
    }
-   showLines(array:Array<fabric.Line>){
-    let change=new Change("show");
-    change.array=array;
-    this.undostack.push(change);
-   }
-   hideLines(array:Array<fabric.Line>){
-    let change=new Change("hide");
-    change.array=array;
+
+   filterLines(ob1:object){
+    let change=new Change("filter");
+    change.obj=ob1;
     this.undostack.push(change);
    }
 
-   undo() {
+
+   showAllLines(ob1:object){
+    let change=new Change("show");
+    change.obj=ob1;
+    this.undostack.push(change);
+   }
+
+   undo():any {
     if(this.undostack.length==0)
     return;
     let change=this.undostack.pop();
+    this.redostack.push(change);
     if(change.type=="add"){
       change.line.opacity=0;
     }
-    else if(change.type=="show"){
-      for(let line of change.array){
-        line.opacity=0;
-      }
-    }
     else{
-      for(let line of change.array){
-        line.opacity=1;
-      }
+      return change;
     }
-    this.redostack.push(change);
    }
 
    redo(){
      if(this.redostack.length==0)
      return;
     let change=this.redostack.pop();
+    this.undostack.push(change);
     if(change.type=="add"){
       change.line.opacity=1;
     }
-    else if(change.type=="show"){
-      for(let line of change.array){
-        line.opacity=1;
-      }
-    }
     else{
-      for(let line of change.array){
-        line.opacity=0;
-      }
-   }
-   this.undostack.push(change);
+      return change;
+    }
   }
 }
 
-class Change{
+export class Change{
   type:string="";
-  line?:fabric.Line;
-  array?:Array<fabric.Line>;
+  line?:fabric.Object;
+  obj?:any;
   constructor(type:string){
     this.type=type;
   }

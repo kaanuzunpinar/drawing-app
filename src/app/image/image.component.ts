@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { fabric }  from "fabric";
 import { IDataURLOptions } from 'fabric/fabric-impl';
 import { ButtonService } from '../button.service';
-import { HistoryService } from '../history.service';
+import { HistoryService, Change } from '../history.service';
 import { LineService } from '../line.service';
 
 @Component({
@@ -90,16 +90,16 @@ export class ImageComponent implements OnInit {
         var points = [pointer.x, pointer.y, pointer.x, pointer.y];
         
         if(this.shape=="line"){
-        this.line = new fabric.Line(points, {
-          strokeWidth: this.lineThickness,
-          fill: this.lineColor,
-          stroke: this.lineColor,
-          originX: 'center',
-          originY: 'center'
-        });
-        this.canvas.add(this.line);
-        this.lineService.add(this.line);//for filtering.
-        this.history.addLine(this.line);//for undo and redo
+          this.line = new fabric.Line(points, {
+            strokeWidth: this.lineThickness,
+            fill: this.lineColor,
+            stroke: this.lineColor,
+            originX: 'center',
+            originY: 'center'
+          });
+          this.canvas.add(this.line);
+          this.lineService.add(this.line);//for filtering.
+          this.history.addLine(this.line);//for undo and redo
         }
 
 
@@ -113,8 +113,16 @@ export class ImageComponent implements OnInit {
             strokeWidth:1,
             stroke:this.lineColor,
             fill:this.lineColor,
+            lockMovementX:true,
+            lockMovementY: true,
+            lockRotation: true,
+            lockScalingX: true,
+            lockScalingY: true,
+            evented: false,
           })
           this.canvas.add(point);
+          this.lineService.add(point);//for filtering.
+          this.history.addLine(point);//for undo and redo
         }
         
       });
@@ -123,10 +131,13 @@ export class ImageComponent implements OnInit {
 
 
       this.canvas.on('mouse:move', (o: any) => {
-        if (!this.isDown) return;
+        if(this.shape=="line"){
+          if (!this.isDown) return;
         var pointer = this.canvas.getPointer(o.e);
         this.line.set({ x2: pointer.x, y2: pointer.y });
         this.canvas.renderAll();
+        }
+        
   
       });
 
@@ -143,26 +154,47 @@ export class ImageComponent implements OnInit {
   }
 
   filter(param:string|number){//choose color/thickness
+    let beforeColor=this.filteredColor;
+    let beforeSize=this.filteredSize;
     if(typeof param == 'string'){
       this.filteredColor=param;
     } 
     else{
       this.filteredSize=param;
     }
+    let array=this.lineService.filter(this.filteredColor,this.filteredSize);
+    if(array.length>0)
+      this.history.filterLines({fC:this.filteredColor,fS:this.filteredSize,bC:beforeColor,bS:beforeSize});
   }
 
+  undo(){
+    let returned:Change =this.history.undo();
+    if(returned){
+      this.filteredColor=returned.obj?.bC;
+      this.filteredSize=returned.obj?.bS;
+      this.lineService.filter(this.filteredColor,this.filteredSize);
+    }
+    this.canvas.renderAll();
+  }
+  redo(){
+    let returned:Change=this.history.redo();
+    if(returned){
+      this.filteredColor=returned.obj?.fC;
+      this.filteredSize=returned.obj?.fS;
+      this.lineService.filter(this.filteredColor,this.filteredSize);
+    }
+    this.canvas.renderAll();
+  }
 
-  showHide(show:boolean){
-    if(show){
-      let array=this.lineService.show(this.filteredColor,this.filteredSize);
-      if(array.length>0)
-        this.history.showLines(array);
-    }
-    else{
-      let array= this.lineService.hide(this.filteredColor,this.filteredSize)
-      if(array.length>0)
-        this.history.hideLines(array);
-    }
+  showAll(){
+    let beforeColor=this.filteredColor
+    let beforeSize=this.filteredSize
+    this.filteredColor='';
+    this.filteredSize=-1;
+    let array=this.lineService.showAll();
+    if(array.length>0)
+        this.history.showAllLines({fC:this.filteredColor,fS:this.filteredSize,bC:beforeColor,bS:beforeSize});
+    this.canvas.renderAll();
   }
 
 

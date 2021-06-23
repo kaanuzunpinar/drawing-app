@@ -10,15 +10,14 @@
 <div class="d1" *ngIf="url" style="background-color: rgb(216, 212, 207);margin-left: 30%; margin-right: 30%; margin-top: 20px; border-radius: 10px;">
     <h3 style="margin: 5px;">Edit</h3>
     <div class="ur">
-        <button style="margin-top: 5px;"  (click)="this.history.undo();this.canvas.renderAll()">Undo!</button>
-        <button style="margin-top: 5px;"  (click)="this.history.redo();this.canvas.renderAll()">Redo!</button>
+        <button style="margin-top: 5px;"  (click)="undo()">Undo!</button>
+        <button style="margin-top: 5px;"  (click)="redo()">Redo!</button>
     </div>
     <div *ngIf="filteredColor || filteredSize>0" >
         <label >Filtered: 
             <span *ngIf="filteredColor" [style.color]="filteredColor">{{filteredColor.toUpperCase()}} Color</span>
             <span *ngIf="filteredSize>0" [style.font-weight]="'bold'"> {{pxToText(filteredSize)}} Size </span> </label>
-        <button (click)="showHide(true)">Show Lines</button>
-        <button (click)="showHide(false)">Hide Lines</button>
+        <button (click)="showAll()">Show all</button>
     </div>
     
     <div class>

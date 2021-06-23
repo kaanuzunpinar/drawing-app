@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
+import { fabric }  from "fabric";
 
 @Injectable({
   providedIn: 'root'
 })
 export class LineService {
-  lines:Array<fabric.Line>;
+  lines:Array<fabric.Object>;
   canvas:fabric.Canvas | undefined;
 
 
@@ -16,73 +17,88 @@ export class LineService {
    }
 
 
-   add(line:fabric.Line){
+   add(line:fabric.Object){
      this.lines.push(line);
    }
-   hide(color:string,size:number):Array<fabric.Line>{
+   filter(color:string,size:number):any{
+     this.showAll();
      let array=[];
      if(size>0){
       if(color){
         for(let l1 of this.lines){
-          if(l1.fill==color && l1.strokeWidth==size){
-            l1.opacity=0;
-            array.push(l1);
+          if(l1 instanceof fabric.Circle){
+            if(l1.fill!=color || l1.radius!=size){
+              if(l1.opacity!=0){
+                l1.opacity=0;
+              array.push(l1);
+              }
+              
+            }
           }
+          else{
+            if(l1.fill!=color || l1.strokeWidth!=size){
+              if(l1.opacity!=0){
+                l1.opacity=0;
+              array.push(l1);
+              }
+              
+            }
+          }
+         
         }
       }
       else{
         for(let l1 of this.lines){
-          if(l1.strokeWidth==size){
-            l1.opacity=0;
-            array.push(l1);
+          if(l1 instanceof fabric.Circle){
+            if(l1.radius!=size){
+              if(l1.opacity!=0){
+                l1.opacity=0;
+                array.push(l1);
+              }
+            }
           }
+          else{
+            if(l1.strokeWidth!=size){
+              if(l1.opacity!=0){
+                l1.opacity=0;
+                array.push(l1);
+              }
+            }   
+          }
+         
         }
       }
      }
      else{
+       if(!color){
+         return this.showAll();
+       }
       for(let l1 of this.lines){
-        if(l1.fill==color){
-          l1.opacity=0;
-          array.push(l1);
-        }
+        if(l1.fill!=color){
+          if(l1.opacity!=0){
+            l1.opacity=0;
+            array.push(l1);
+          }
+        } 
+       
       }
      }
     this.canvas?.renderAll();
     return array;
    }
 
-   show(color:string,size:number):Array<fabric.Line>{
+   showAll(){
     let array=[];
-    if(size>0){
-      if(color){
-        for(let l1 of this.lines){
-          if(l1.fill==color  && l1.strokeWidth==size){
-            l1.opacity=1;
-            array.push(l1);
-          }
-        }
-      }
-      else{
-        for(let l1 of this.lines){
-          if(l1.strokeWidth==size){
-            l1.opacity=1;
-            array.push(l1);
-          }
-        }
-      }
-      
-    }
-    else{
-      for(let l1 of this.lines){
-        if(l1.fill==color){
-          l1.opacity=1;
-          array.push(l1);
-        }
-      }
-    }
-    
-    
-    this.canvas?.renderAll();
-    return array;
+     for(let l1 of this.lines){
+       if(l1.opacity!=1){
+        l1.opacity=1;
+        array.push(l1);
+       }
+       
+     }
+     this.canvas?.renderAll();
+     return array;
    }
+
+   
 }
