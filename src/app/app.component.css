@@ -1,3 +1,4 @@
+
 .body{
     min-height:1000px;
     min-width: max-content;       
@@ -5,13 +6,5 @@
     height:1000px;
     display: grid;
     grid-template-columns: 85% 15%;
-    margin:0px;
-    padding:0;
-    outline: 0;
     background-color: 	#343A40;
- }
- div{
-     color:#DDDDDD;
-     margin:5px;
-     border-radius: 2%;
  }

@@ -1,0 +1,16 @@
+
+.main{
+    color:#DDDDDD;
+    border-left: solid;
+    border-width: 0.5px;
+    height: 100%;
+    border-color: grey;
+}
+.text{
+   display: grid;
+   justify-items: center;
+}
+ul{
+   list-style-type: none;
+   padding-left: 0;
+}

@@ -4,6 +4,7 @@ import { IDataURLOptions } from 'fabric/fabric-impl';
 import { ButtonService } from '../button.service';
 import { HistoryService, Change } from '../history.service';
 import { LineService } from '../line.service';
+import { SavingService } from '../saving.service';
 
 @Component({
   selector: 'app-image',
@@ -21,13 +22,14 @@ export class ImageComponent implements OnInit {
   filteredColor:string="";
   filteredSize:number=-1;
 
-  images:Array<any>=[];
+  images:Array<any>=[];//array for saved images.
   shape:string="line";
 
   constructor(
     private service:ButtonService,
     public history:HistoryService,
-    private lineService:LineService) {
+    private lineService:LineService,
+    private saveService:SavingService) {
 
     this.service.type$.subscribe((data) => {
       if(typeof(data)=='number'){
@@ -46,7 +48,10 @@ export class ImageComponent implements OnInit {
     this.service.shapes$.subscribe((shapeS)=>{//subscription for line or point
       this.shape=shapeS;
     });
-    
+    this.saveService.pick$.subscribe((image)=>{
+      this.url=image;
+      this.createImage();
+    });
    }
  
   ngOnInit(): void {
@@ -226,12 +231,9 @@ export class ImageComponent implements OnInit {
   save():void{
     var dataUrl=this.canvas.toDataURL('download' as IDataURLOptions);
     this.debugBase64(dataUrl);
-    this.images.push(dataUrl);
+    this.saveService.sendURL(dataUrl);
   }
   //end of save methods.
 
-  pickImage(image:string){
-    this.url=image;
-    this.createImage();
-  }
+  
 }
