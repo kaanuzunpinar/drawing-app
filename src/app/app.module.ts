@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { ImageComponent } from './image/image.component';
 import { MenuComponent } from './menu/menu.component';
 import { SavedImgComponent } from './saved-img/saved-img.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { SavedImgComponent } from './saved-img/saved-img.component';
   ],
   imports: [
     BrowserModule,
+    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
