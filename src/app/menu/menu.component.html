@@ -1,19 +1,46 @@
-<input  type="file" accept="image/*" (change)="onFileChanged($event)" >
-<h3 style="margin: 5px;">Draw</h3>
-<div >
-    Shape: <button (click)="shape('line')">Line </button> 
-    <button [style.margin-left]="'10px'"  (click)="shape('point')">Point</button>
-</div>
-<div>
-    Color: <button (click)="color('black')">Black </button> 
-    <button [style.color]="'red'" (click)="color('red')">Red</button>
-    <button [style.color]="'blue'" (click)="color('blue')">Blue</button>
-</div>
-<div>
-    Thickness: 
-    <button [style.color]="'rgb(76, 223, 76)'" (click)="thick(2)">Lower </button> 
-    <button [style.color]="'rgb(76, 223, 76)'" (click)="thick(4)">Low </button> 
-    <button [style.color]="'rgb(223, 164, 76)'" (click)="thick(6)">Mid</button>
-    <button [style.color]="'rgb(223, 164, 76)'" (click)="thick(10)">High</button>
-    <button [style.color]="'red'" (click)="thick(20)">Higher</button>
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div class="custom-file">
+            <input type="file" class="custom-file-input" accept="image/*" id="customFile" (change)="onFileChanged($event)">
+            <label class="custom-file-label" for="customFile">Choose file</label>
+          </div>
+    </div>
+   
+    
+    <div class="row justify-content-md-center">
+        <div class="btn-group" role="group" aria-label="Basic example">
+        <button type="button" class="btn btn-primary " (click)="shape('line')">Line</button>
+        <button type="button" class="btn btn-primary" (click)="shape('point')">Point</button>
+      </div>   
+    </div>
+    
+    <div class="row justify-content-md-center">
+        <div class="col">
+            <div ngbDropdown class="d-inline-block">
+                <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Change Color</button>
+                <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                  <button ngbDropdownItem (click)="color('black')">Black</button>
+                  <button ngbDropdownItem (click)="color('red')" >Red</button>
+                  <button ngbDropdownItem (click)="color('blue')" >Blue</button>
+                </div>
+          </div>
+
+        </div>
+
+        <div class="col">
+            <div ngbDropdown class="d-inline-block">
+                <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Change Thickness</button>
+                <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                  <button ngbDropdownItem (click)="thick(2)">Lower</button>
+                  <button ngbDropdownItem (click)="thick(4)" >Low</button>
+                  <button ngbDropdownItem (click)="thick(6)" >Mid</button>
+                  <button ngbDropdownItem (click)="thick(10)">High</button>
+                  <button ngbDropdownItem (click)="thick(20)" >Higher</button>
+                </div>
+          </div>
+
+        </div>
+
+       
+    </div>
 </div>

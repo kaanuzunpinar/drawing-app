@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ButtonService } from '../button.service';
+
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
@@ -8,6 +9,8 @@ import { ButtonService } from '../button.service';
 
 export class MenuComponent implements OnInit {
   constructor(private service:ButtonService) { }
+  @Output() newItemEvent = new EventEmitter<string>();
+  navElement?: HTMLElement;
   url:string="";
   ngOnInit(): void {
   }

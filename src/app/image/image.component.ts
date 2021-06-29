@@ -59,6 +59,7 @@ export class ImageComponent implements OnInit {
       selection:false,
     });
     this.lineService.create(this.canvas);
+    
   }
   createImage(){
     var imgElement = document.createElement('img');
