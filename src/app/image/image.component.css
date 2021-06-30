@@ -2,10 +2,38 @@
     display:grid;
     justify-items: center;
 }
-.d1{
+
+.sidenav {
+  width: 130px;
+  height: 200px;
+  position: fixed;
+  z-index: 1;
+  top: 150px;
+  left: 10px;
+  overflow-x: hidden;
+  padding: 8px 0;
+}
+
+.edit{
     display: grid;
     justify-items: center;
-}
+    margin-left: 30%; 
+    margin-right: 30%; 
+    margin-top: 20px; 
+    border-radius: 10px;
+    
+  }
+  @media (max-width: 1300px) {
+    .edit{
+      display: grid;
+      justify-items: center;
+      margin-left: 20%; 
+      margin-right: 20%; 
+      margin-top: 20px; 
+      border-radius: 10px;
+      
+    }
+  }
 button{
     margin-left: 5px;
     margin-right: 5px;
