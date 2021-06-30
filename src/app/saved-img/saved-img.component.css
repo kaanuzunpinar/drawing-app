@@ -1,11 +1,13 @@
+.sidenav{
+   width: 15%;
+   height: 100%;
+   position: fixed;
+   z-index: 1;
 
-.main{
-    color:#DDDDDD;
-    border-left: solid;
-    border-width: 0.5px;
-    height: 100%;
-    border-color: grey;
-}
+   overflow-x: hidden;
+   padding: 8px 0;
+   border-radius: 10px;
+ }
 .text{
    display: grid;
    justify-items: center;
