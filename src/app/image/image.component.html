@@ -8,7 +8,7 @@
         </div>
 
         <div>
-            <label  class="text-muted"> Color: {{lineColor.toUpperCase()}} </label>
+            <label  class="text-muted"> Color: {{this.lineColor.toUpperCase()}} </label>
         </div>
 
         <div>
@@ -25,11 +25,11 @@
             <label  class="text-info justify-content-center" style="display: block; margin-top: 50%;" >No Active Filter</label>
         </ng-template>
         <div>
-            <label *ngIf="filteredColor" class="text-muted"> Color: {{lineColor.toUpperCase()}} </label>
+            <label *ngIf="filteredColor" class="text-muted"> Color: {{this.filteredColor.toUpperCase()}} </label>
         </div>
 
         <div>
-            <label  *ngIf="filteredSize>0" class="text-muted"> Thickness: {{pxToText(this.lineThickness).toUpperCase()}}</label>
+            <label  *ngIf="filteredSize>0" class="text-muted"> Thickness: {{pxToText(this.filteredSize).toUpperCase()}}</label>
         </div>
 
 

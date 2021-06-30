@@ -79,6 +79,7 @@ export class ImageComponent implements OnInit {
       imageinstance.lockScalingX = true;
       imageinstance.lockScalingY = true;
       imageinstance.evented = false;
+      this.canvas.clear();
       this.canvas.add(imageinstance)
       this.canvas.setWidth(imgElement.width);
       this.canvas.setHeight(imgElement.height);
