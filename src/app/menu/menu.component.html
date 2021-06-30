@@ -9,25 +9,22 @@
     
     <div class="row justify-content-md-center">
         <div class="btn-group" role="group" aria-label="Basic example">
-        <button type="button" class="btn btn-primary " (click)="shape('line')">Line</button>
-        <button type="button" class="btn btn-primary" (click)="shape('point')">Point</button>
+        <button [style.marginRight.px]="''" type="button" class="btn btn-primary " (click)="shape('line')">Line</button>
+        <button type="button" class="btn btn-info" (click)="shape('point')">Point</button>
       </div>   
     </div>
     
-    <div class="row justify-content-md-center">
-        <div class="col">
-            <div ngbDropdown class="d-inline-block">
-                <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Change Color</button>
+    <div class="row justify-content-sm-center">
+          <div ngbDropdown class="d-inline-block">
+                <button [style.marginRight.px]="'3'" class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Change Color</button>
                 <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                   <button ngbDropdownItem (click)="color('black')">Black</button>
                   <button ngbDropdownItem (click)="color('red')" >Red</button>
                   <button ngbDropdownItem (click)="color('blue')" >Blue</button>
                 </div>
-          </div>
 
         </div>
 
-        <div class="col">
             <div ngbDropdown class="d-inline-block">
                 <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Change Thickness</button>
                 <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
@@ -39,7 +36,6 @@
                 </div>
           </div>
 
-        </div>
 
        
     </div>

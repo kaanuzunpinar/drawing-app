@@ -13,42 +13,60 @@
 
 </div>
 
-<div class="d1" *ngIf="url" style="background-color: #DDDDDD;margin-left: 30%; margin-right: 30%; margin-top: 20px; border-radius: 10px;">
-    <h3 style="margin: 5px;">Edit</h3>
-    <div class="ur">
-        <button style="margin-top: 5px;"  (click)="undo()">Undo!</button>
-        <button style="margin-top: 5px;"  (click)="redo()">Redo!</button>
-    </div>
-    <div *ngIf="filteredColor || filteredSize>0" >
-        <label >Filtered: 
-            <span *ngIf="filteredColor" [style.color]="filteredColor">{{filteredColor.toUpperCase()}} Color</span>
-            <span *ngIf="filteredSize>0" [style.font-weight]="'bold'"> {{pxToText(filteredSize)}} Size </span> </label>
-        <button (click)="showAll()">Show all</button>
-    </div>
+<div class="d1"  style="margin-left: 30%; margin-right: 30%; margin-top: 20px; border-radius: 10px;">
     
-    <div class>
-        <div class="dropdown">
-            <button class="dropbtn" >Filter By Color</button>
-            <div class="dropdown-content">
-              <a (click)="filter('black')" [style.color]="'black'">Black</a>
-              <a (click)="filter('red')" [style.color]="'red'">Red</a>
-              <a (click)="filter('blue')"[style.color]="'blue'">Blue</a>
-              <a (click)="filter('')">Clear</a>
-            </div>
+    <div class="container" >
+
+
+
+        <div class="row row-cols-2 ">
+            <button type="button" class="btn btn-outline-info col-md" style="margin-top: 5px;"  (click)="undo()"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z"/>
+                <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z"/>
+              </svg> Undo!</button>
+            <button type="button" class="btn btn-outline-info col-md" style="margin-top: 5px;"  (click)="redo()"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
+                <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
+              </svg> Redo!</button>
         </div>
-        <div class="dropdown">
-            <button class="dropbtn" >Filter By Thickness</button>
-            <div class="dropdown-content">
-              <a (click)="filter(2)" [style.font-size.px]="'10'">Lower</a>
-              <a (click)="filter(4)" [style.font-size.px]="'12'">Low</a>
-              <a (click)="filter(6)" [style.font-size.px]="'14'">Mid</a>
-              <a (click)="filter(10)" [style.font-size.px]="'16'">High</a>
-              <a (click)="filter(20)" [style.font-size.px]="'20'">Higher</a>
-              <a (click)="filter(-1)" [style.font-size.px]="'20'" [style.color]="'rgb(76, 223, 76)'">Clear</a>
+
+        <div class="row justify-content-md-center " [style.paddingTop.px]="'2'">
+             <div [style.paddingLeft.px]="'0'" ngbDropdown class="d-inline-block  col-md">
+                <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Filter By Color</button>
+                <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                    <button ngbDropdownItem (click)="filter('black')">Black</button>
+                    <button ngbDropdownItem (click)="filter('red')" >Red</button>
+                    <button ngbDropdownItem (click)="filter('blue')" >Blue</button>
+                    <button ngbDropdownItem (click)="filter('')" >Clear</button>
+                </div>
             </div>
+           
+            <div [style.paddingRight.px]="'0'" ngbDropdown class="d-inline-block  col-md offset-md-3">
+                <button [style.marginRight.px]="'3'" class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Filter By Thickness</button>
+                <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                    <button ngbDropdownItem (click)="filter(2)">Lower</button>
+                    <button ngbDropdownItem (click)="filter(4)">Low</button>
+                    <button ngbDropdownItem (click)="filter(6)">Mid</button>
+                    <button ngbDropdownItem (click)="filter(10)" >High</button>
+                    <button ngbDropdownItem (click)="filter(20)">Higher</button>
+                    <button ngbDropdownItem (click)="filter(-1)" >Clear</button>
+                </div>
+            </div>
+           
+            
         </div>
+
+        <div *ngIf="filteredColor || filteredSize>0" >
+            <label >Filtered: 
+                <span *ngIf="filteredColor" [style.color]="filteredColor">{{filteredColor.toUpperCase()}} Color</span>
+                <span *ngIf="filteredSize>0" [style.font-weight]="'bold'"> {{pxToText(filteredSize)}} Size </span> </label>
+            <button (click)="showAll()">Show all</button>
+        </div>
+        
     </div>
+   
     
+   
     
   
 </div>
