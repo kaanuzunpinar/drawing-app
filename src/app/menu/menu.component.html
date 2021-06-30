@@ -7,14 +7,44 @@
     </div>
    
     
-    <div class="row justify-content-md-center">
-        <div class="btn-group" role="group" aria-label="Basic example">
-        <button [style.marginRight.px]="''" type="button" class="btn btn-primary " (click)="shape('line')">Line</button>
-        <button type="button" class="btn btn-info" (click)="shape('point')">Point</button>
-      </div>   
+      <div class="row">
+        <label class="col-5" [style.paddingTop]="'8px'"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
+          <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"/>
+        </svg> Change Shape: </label>
+        <ul class="list-group list-group-horizontal">
+          <button type="button" [style.padding]="'8px 59px'" class="list-group-item btn-outline-primary btn-sm">Line</button>
+          <button type="button" [style.padding]="'8px 59px'" class="list-group-item btn-outline-primary btn-sm ">Point</button>
+        </ul>
+      </div>  
+    <div class="row">
+      <label class="col-5" [style.paddingTop]="'8px'"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-palette" viewBox="0 0 16 16">
+        <path d="M8 5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm4 3a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zM5.5 7a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm.5 6a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
+        <path d="M16 8c0 3.15-1.866 2.585-3.567 2.07C11.42 9.763 10.465 9.473 10 10c-.603.683-.475 1.819-.351 2.92C9.826 14.495 9.996 16 8 16a8 8 0 1 1 8-8zm-8 7c.611 0 .654-.171.655-.176.078-.146.124-.464.07-1.119-.014-.168-.037-.37-.061-.591-.052-.464-.112-1.005-.118-1.462-.01-.707.083-1.61.704-2.314.369-.417.845-.578 1.272-.618.404-.038.812.026 1.16.104.343.077.702.186 1.025.284l.028.008c.346.105.658.199.953.266.653.148.904.083.991.024C14.717 9.38 15 9.161 15 8a7 7 0 1 0-7 7z"/>
+      </svg> Change Color: </label>
+      <ul class="list-group list-group-horizontal">
+        <button type="button" [style.padding]="'8px 35px'" class="list-group-item btn-outline-primary btn-sm">Black</button>
+        <button type="button" [style.padding]="'8px 35px'" class="list-group-item btn-outline-primary btn-sm ">Red</button>
+        <button type="button" [style.padding]="'8px 35px'" class="list-group-item btn-outline-primary btn-sm">Blue</button>
+      </ul>
     </div>
     
+    <div class="row">
+      <label class="col-5" [style.paddingTop]="'8px'"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-aspect-ratio" viewBox="0 0 16 16">
+        <path d="M0 3.5A1.5 1.5 0 0 1 1.5 2h13A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 12.5v-9zM1.5 3a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-13z"/>
+        <path d="M2 4.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1H3v2.5a.5.5 0 0 1-1 0v-3zm12 7a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1 0-1H13V8.5a.5.5 0 0 1 1 0v3z"/>
+      </svg> Change Thickness: </label>
+      <ul class="list-group list-group-horizontal">
+        <button type="button" [style.padding]="'8px 13px'" class="list-group-item btn-outline-primary btn-sm">Lower</button>
+        <button type="button" [style.padding]="'8px 13px'" class="list-group-item btn-outline-primary btn-sm ">Low</button>
+        <button type="button" [style.padding]="'8px 13px'" class="list-group-item btn-outline-primary btn-sm">Mid</button>
+        <button type="button" [style.padding]="'8px 13px'" class="list-group-item btn-outline-primary btn-sm ">High</button>
+        <button type="button" [style.padding]="'8px 14px'" class="list-group-item btn-outline-primary btn-sm">Higher</button>
+      </ul>
+    </div>
+    
+
     <div class="row justify-content-sm-center">
+      
           <div ngbDropdown class="d-inline-block">
                 <button [style.marginRight.px]="'3'" class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Change Color</button>
                 <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
