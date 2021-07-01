@@ -7,12 +7,16 @@
             <label class="text-info">Currently Drawing</label>
         </div>
 
-        <div>
-            <label  class="text-muted"> Color: {{this.lineColor.toUpperCase()}} </label>
+        <div class="leftMenu">
+            <label  class="text-muted"> Shape: </label> <label class="text-muted">{{this.shape.toUpperCase()}} </label>
         </div>
 
-        <div>
-            <label  class="text-muted"> Thickness: {{pxToText(this.lineThickness).toUpperCase()}}</label>
+        <div class="leftMenu">
+            <label  class="text-muted"> Color: </label> <label class="text-muted">{{this.lineColor.toUpperCase()}}  </label>
+        </div>
+
+        <div class="leftMenu">
+            <label  class="text-muted"> Thickness: </label> <label class="text-muted">{{pxToText(this.lineThickness).toUpperCase()}} </label>
         </div>
         <hr class="dropdown-divider" >
         <div >
@@ -24,12 +28,12 @@
         <ng-template #noFilter >
             <label  class="text-info justify-content-center" style="display: block; margin-top: 50%;" >No Active Filter</label>
         </ng-template>
-        <div>
-            <label *ngIf="filteredColor" class="text-muted"> Color: {{this.filteredColor.toUpperCase()}} </label>
+        <div class="leftMenu">
+            <label *ngIf="filteredColor" class="text-muted"> Color:  </label> <label class="text-muted">{{this.filteredColor.toUpperCase()}}  </label>
         </div>
 
-        <div>
-            <label  *ngIf="filteredSize>0" class="text-muted"> Thickness: {{pxToText(this.filteredSize).toUpperCase()}}</label>
+        <div class="leftMenu">
+            <label  *ngIf="filteredSize>0" class="text-muted"> Thickness: </label> <label class="text-muted">{{pxToText(this.filteredSize).toUpperCase()}}  </label>
         </div>
 
 

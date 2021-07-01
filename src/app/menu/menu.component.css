@@ -2,3 +2,13 @@ div{
     margin-top: 2px;
     margin-bottom: 2px;
 }
+.shapeButton{
+    padding: 8px 59px;
+}
+
+.colorButton{
+    padding: 8px 35px;
+}
+.thicknessButton{
+    padding: 8px 13px;
+}
