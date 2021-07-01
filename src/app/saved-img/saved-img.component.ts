@@ -18,7 +18,7 @@ export class SavedImgComponent implements OnInit {
       image.style.borderRadius="50%";
       let li=document.createElement('li');
       let text=document.createElement('div');
-      text.innerHTML=`<span class="text-info">Image ${this.index++}</span>`;
+      text.innerHTML=`<span class="text-muted">Image ${this.index++}</span>`;
       let element=document.getElementsByTagName('ul')[3];
       li.style.textAlign="center"
       li.appendChild(text);
