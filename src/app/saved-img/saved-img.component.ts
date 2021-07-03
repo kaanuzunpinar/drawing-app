@@ -16,6 +16,7 @@ export class SavedImgComponent implements OnInit {
       image.width=100;
       image.height=100;
       image.style.borderRadius="50%";
+      console.log(image);
       let li=document.createElement('li');
       let text=document.createElement('div');
       text.innerHTML=`<span class="text-muted">Image ${this.index++}</span>`;

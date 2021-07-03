@@ -23,8 +23,8 @@ export class ImageComponent implements OnInit {
   filteredSize:number=-1;
 
   scaled=false;
-  scaledWidth=0;
-  scaledHeight=0;
+  scaledWidth=1;
+  scaledHeight=1;
 
   imageInstance?:fabric.Image;
 
@@ -69,7 +69,6 @@ export class ImageComponent implements OnInit {
   }
   createImage(){
     var imgElement = document.createElement('img');
-    console.log(imgElement.width+" "+imgElement.height);
     imgElement.src = this.url;
     imgElement.onload = () => {
       //
@@ -82,17 +81,21 @@ export class ImageComponent implements OnInit {
         cornerSize: 10,
         
       });
-      this.scaledWidth=imgElement.width;
-      this.scaledHeight=imgElement.height;
+      this.scaled=false;
+      this.scaledHeight=1;
+      this.scaledWidth=1;
+
+
       if(imgElement.width>600){
         this.scaled=true;
         this.imageInstance.scaleToWidth(500);
+        this.scaledWidth=imgElement.width/this.imageInstance.getScaledWidth();
       }
       if(this.imageInstance.getScaledHeight()>600){
         this.scaled=true;
         this.imageInstance.scaleToHeight(500);
+        this.scaledHeight=imgElement.height/this.imageInstance.getScaledHeight();
       }
-      console.log(this.imageInstance.getScaledHeight())
       this.imageInstance.lockMovementX = true;
       this.imageInstance.lockMovementY = true;
       this.imageInstance.lockRotation = true;
@@ -100,7 +103,7 @@ export class ImageComponent implements OnInit {
       this.imageInstance.lockScalingY = true;
       this.imageInstance.evented = false;
       this.canvas.clear();
-      this.canvas.add(this.imageInstance)
+      this.canvas.add(this.imageInstance);
       this.canvas.setWidth(this.imageInstance.getScaledWidth());
       this.canvas.setHeight(this.imageInstance.getScaledHeight());
       //
@@ -250,17 +253,15 @@ export class ImageComponent implements OnInit {
   }
 
   save():void{
-    if(this.scaled){
-      console.log(this.scaledWidth);
-      this.imageInstance?.scaleToWidth(this.scaledWidth);
-      this.imageInstance?.scaleToHeight(this.scaledHeight);
-      this.canvas.getElement().width=this.scaledWidth;
-      this.canvas.getElement().height=this.scaledHeight;
-    }
-    var dataUrl=this.canvas.toDataURL({
-      'download' as 
+    var dataUrl=this.canvas.toDataURL('download' as IDataURLOptions);
+    var downloadUrl=this.canvas.toDataURL({
+      format: 'png', 
+      multiplier: this.scaledWidth*this.scaledHeight, 
+      left: 0, 
+      top: 0, 
     });
-    this.debugBase64(dataUrl);
+
+    this.debugBase64(downloadUrl);
     this.saveService.sendURL(dataUrl);
   }
   //end of save methods.
