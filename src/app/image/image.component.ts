@@ -170,12 +170,11 @@ export class ImageComponent implements OnInit {
   
       });
 
-
-
-
       this.canvas.on('mouse:up', (o: any) => {
         this.isDown = false;
       });
+  
+      
 
     }
 

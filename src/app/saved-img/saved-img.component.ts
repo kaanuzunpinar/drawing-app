@@ -18,7 +18,7 @@ export class SavedImgComponent implements OnInit {
       image.style.borderRadius="50%";
       let li=document.createElement('li');
       let text=document.createElement('div');
-      text.innerHTML=`<span class="text-muted">Image ${this.index++}</span>`;
+      text.innerHTML=`<span class="text-light">Image ${this.index++}</span>`;
       let element=document.getElementsByTagName('ul')[0];
       li.style.textAlign="center"
       li.appendChild(text);
@@ -27,7 +27,7 @@ export class SavedImgComponent implements OnInit {
         this.saveService.pickImage(url);
       });
       li.addEventListener("mouseenter",(e)=>{
-        li.style.background="grey";
+        li.style.background="white";
       })
       li.addEventListener("mouseleave",(e)=>{
         li.style.background="none";
