@@ -6,3 +6,13 @@ div{
     border-color:white;
     border-radius: 5px;
 }
+
+
+.btn-sky{
+    background-color: #11a9cc !important;
+  color: #fff
+  }
+
+.text{
+    font-size: large;
+}

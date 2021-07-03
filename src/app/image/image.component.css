@@ -51,3 +51,9 @@ button{
 button:hover{
   background-color: #ddd;
 }
+
+.btn-azure{
+  background-color: #2dc3e8 !important;
+  color: #fff
+  
+}
