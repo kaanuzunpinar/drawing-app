@@ -1,6 +1,11 @@
 .center{
     display:grid;
     justify-items: center;
+    display: grid;
+    justify-items: center;
+    margin-left: 25%; 
+    margin-right: 15%; 
+    margin-top: 5%;
 }
 .leftMenu{
   display: grid;
@@ -22,8 +27,8 @@
 .edit{
     display: grid;
     justify-items: center;
-    margin-left: 30%; 
-    margin-right: 30%; 
+    margin-left: 25%; 
+    margin-right: 15%; 
     margin-top: 20px; 
     border-radius: 10px;
     
@@ -46,4 +51,3 @@ button{
 button:hover{
   background-color: #ddd;
 }
-  
