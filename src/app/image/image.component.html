@@ -1,5 +1,15 @@
-    <div id="canvas_div" class="center" >
-        <canvas id="c"></canvas>
+    <div class="center">
+        <span id="canvas_div" ><canvas id="c"></canvas></span>
+    </div>
+    <div class="container " *ngIf="url"  >
+        <div class="row justify-content-md-center center" [style.marginTop]="'4px'"> 
+            <button class="btn btn-primary" id="link" (click)="save()"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-save" viewBox="0 0 16 16">
+                <path d="M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1v7.293l2.646-2.647a.5.5 0 0 1 .708.708l-3.5 3.5a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L7.5 9.293V2a2 2 0 0 1 2-2H14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h2.5a.5.5 0 0 1 0 1H2z"/>
+              </svg> Save!
+            </button>
+
+        </div>
+
     </div>
     <div class="sidenav border bg-light text-center">
         <div >
@@ -37,79 +47,81 @@
 
 
     </div>
-    <div class="container " *ngIf="url"  [style.paddingTop]="'5px'">
-        <div class="row justify-content-md-center center">
-            <button class="btn btn-success" id="link" (click)="save()"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-save" viewBox="0 0 16 16">
-                <path d="M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1v7.293l2.646-2.647a.5.5 0 0 1 .708.708l-3.5 3.5a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L7.5 9.293V2a2 2 0 0 1 2-2H14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h2.5a.5.5 0 0 1 0 1H2z"/>
-              </svg> Save!
-            </button>
-
-        </div>
-
-    </div>
+   
 
    
-    <app-menu class="edit" [style.marginTop]="'10%'"></app-menu>
+    <app-menu class="edit" [style.paddingTop]="'64px'" ></app-menu>
         
 
 
-<div class="edit" [style.paddingTop.px]="'20'">
+<div class="edit" >
     
-    <div class="container"  >
-
-
-
-    
-
+    <div class="container" >
         <div class="row " >
-            <label class="col-4" ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-filter" viewBox="0 0 16 16">
+            <label  class="col-4" ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-filter" viewBox="0 0 16 16">
                 <path d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
               </svg> Filtering:</label>
-            <span  ngbDropdown class="d-inline-block btn-sm col" >
-                <button class="btn btn-secondary " id="dropdownBasic1" ngbDropdownToggle>Filter By Color</button>
-                <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                    <button ngbDropdownItem (click)="filter('black')">Black</button>
-                    <button ngbDropdownItem (click)="filter('red')" >Red</button>
-                    <button ngbDropdownItem (click)="filter('blue')" >Blue</button>
-                    <button ngbDropdownItem (click)="filter('')" >Clear</button>
+
+
+              <div class="dropdown col">
+                <button  type="button" class="btn btn-secondary"  ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sort-down" viewBox="0 0 16 16">
+                    <path d="M3.5 2.5a.5.5 0 0 0-1 0v8.793l-1.146-1.147a.5.5 0 0 0-.708.708l2 1.999.007.007a.497.497 0 0 0 .7-.006l2-2a.5.5 0 0 0-.707-.708L3.5 11.293V2.5zm3.5 1a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zM7.5 6a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zm0 3a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1h-3zm0 3a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1z"/>
+                  </svg> Filter By Color</button>
+                <div class="dropdown-content">
+                  <a (click)="filter('black')"><label >Black</label></a>
+                  <a (click)="filter('red')"><label >Red</label></a>
+                  <a (click)="filter('blue')"><label >Blue</label></a>
+                  <a (click)="filter('')"><label >Clear</label></a>
                 </div>
-            </span>
-            <span  ngbDropdown class="  btn-sm col">
-                <button  class="btn btn-secondary  btn-md " id="dropdownBasic1" ngbDropdownToggle>Filter By Thickness</button>
-                <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                    <button ngbDropdownItem (click)="filter(2)">Lower</button>
-                    <button ngbDropdownItem (click)="filter(4)">Low</button>
-                    <button ngbDropdownItem (click)="filter(6)">Mid</button>
-                    <button ngbDropdownItem (click)="filter(10)" >High</button>
-                    <button ngbDropdownItem (click)="filter(20)">Higher</button>
-                    <button ngbDropdownItem (click)="filter(-1)" >Clear</button>
+              </div>
+
+
+              <div class="dropdown col" >
+                <button type="button" class="btn btn-secondary" ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sort-down" viewBox="0 0 16 16">
+                    <path d="M3.5 2.5a.5.5 0 0 0-1 0v8.793l-1.146-1.147a.5.5 0 0 0-.708.708l2 1.999.007.007a.497.497 0 0 0 .7-.006l2-2a.5.5 0 0 0-.707-.708L3.5 11.293V2.5zm3.5 1a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zM7.5 6a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zm0 3a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1h-3zm0 3a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1z"/>
+                  </svg> Filter By Thickness</button>
+                <div class="dropdown-content">
+                    <a (click)="filter(2)"><label >Lower</label></a>
+                    <a (click)="filter(4)"><label >Low</label></a>
+                    <a (click)="filter(6)"><label >Mid</label></a>
+                    <a (click)="filter(10)"><label >High</label></a>
+                    <a (click)="filter(20)"><label >Higher</label></a>
+                    <a (click)="filter(-1)"><label >Clear</label></a>
                 </div>
-            </span>
+              </div>
             
-            <button type="button"  class="col  btn btn-secondary btn-sm" (click)="showAll()">Remove All Filters</button>
+              <button [style.fontSize]="'medium'" type="button"  class="col btn btn-secondary " (click)="showAll()"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+              </svg> Remove All Filters </button>
+            
            
-        
+              
         
             
         </div>
 
-        <div class="row  " [style.paddingTop]="'40px'">
-            <button type="button" class="btn btn-outline-primary col"  (click)="undo()"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
+
+        <div class="row  "  [style.paddingTop]="'32px'" >
+            <button  type="button" class="btn btn-outline-info col"  (click)="undo()"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z"/>
                 <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z"/>
               </svg> Undo!</button>
-            <button type="button" class="btn btn-outline-primary col"   (click)="redo()"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
+            <button type="button" class="btn btn-outline-info col"   (click)="redo()"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
                 <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
               </svg> Redo!</button>
            
         </div>
 
-       
+        
+
+
+        
     </div>
    
     
-   
+    
     
   
 </div>
