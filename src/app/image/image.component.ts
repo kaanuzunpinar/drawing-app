@@ -26,17 +26,24 @@ export class ImageComponent implements OnInit {
   scaledWidth=1;
   scaledHeight=1;
 
+  canvasScale = 1; 
+
   imageInstance?:fabric.Image;
 
   images:Array<any>=[];//array for saved images.
   shape:string="line";
+
+  SCALE_FACTOR=1.3;
+  SCALE_FACTOR_OUT=0.7;
+  zoom_array:Array<any>=[];
+  zoom_number=0;
 
   constructor(
     private service:ButtonService,
     public history:HistoryService,
     private lineService:LineService,
     private saveService:SavingService) {
-
+    
     this.service.type$.subscribe((data) => {
       if(typeof(data)=='number'){
         this.lineThickness=data;
@@ -166,20 +173,60 @@ export class ImageComponent implements OnInit {
         this.line.set({ x2: pointer.x, y2: pointer.y });
         this.canvas.renderAll();
         }
-        
   
       });
 
       this.canvas.on('mouse:up', (o: any) => {
         this.isDown = false;
       });
-  
-      
 
+      this.canvas.on('mouse:wheel', (o: any) => {
+        if(o.e.deltaY<0){
+          this.zoomIn(o);
+          for(let element of this.canvas.getObjects()){//added because when zoomed the objects become selectable and have different cursor when hovered on them
+            element.selectable=false;
+            element.hoverCursor=this.canvas.defaultCursor;
+          }
+        }
+        else{
+          this.zoomOut(o);
+          for(let element of this.canvas.getObjects()){
+            element.selectable=false;
+            element.hoverCursor=this.canvas.defaultCursor;
+          }
+        }
+        
+      });
+      const canvasNotNull=document.getElementById( "canvas_div" )!;
+      canvasNotNull.addEventListener('wheel',(e)=>{e.preventDefault()})
     }
 
     
   }
+
+
+  //functions for zooming
+  zoomIn(event:any){
+    if(this.zoom_number<=4){
+      this.zoom_number++;
+      let point = event.absolutePointer;
+      this.zoom_array.push(point);
+      this.canvas.zoomToPoint(point,this.canvas.getZoom()*this.SCALE_FACTOR);
+    }
+    console.log(this.zoom_number);
+    
+  }
+  zoomOut(event:any){
+    if(this.zoom_number>0){
+      this.zoom_number--;
+      let point= this.zoom_array.pop();
+      this.canvas.zoomToPoint(point,this.canvas.getZoom()/this.SCALE_FACTOR);
+    }
+  }
+  //end of zooming functions
+
+
+
 
   filter(param:string|number){//choose color/thickness
     let beforeColor=this.filteredColor;
@@ -266,4 +313,5 @@ export class ImageComponent implements OnInit {
   //end of save methods.
 
   
+
 }
