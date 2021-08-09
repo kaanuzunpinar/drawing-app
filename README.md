@@ -1,11 +1,7 @@
-For demo site: https://drawingimg-app.herokuapp.com/
-This is an online Image-Drawing App. You can complete the images with the lines and save their edited versions.
 
-In this project I used Angular 12.0.2 and fabric-js as a canvas library.
 
 # ImageDraw
-
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.2.
+This is an online Image-Drawing App. You can complete the images with the lines and save their edited versions. For demo site: https://drawingimg-app.herokuapp.com/ This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.2. Also I used fabric-js as a canvas library.
 
 ## Development server
 
